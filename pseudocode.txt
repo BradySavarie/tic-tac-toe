@@ -6,12 +6,36 @@ Main Components:
     gameController Module
     displayController Module
 
-Im going to start by creating a gameboard object and organizing it to be a module. Inside the gameboard object I will initialize an empty gameboard array. 
+Im going to start by creating a gameboard module. Inside of the module an empty 2D array called board will be initialized along with variables representing the number of rows and columns on the board. A nested for loop will run immediately, with the outer loop representing rows and the inner loop representing columns, that calls a function to populate each index of the board array with cell objects. 
 
-The gameboard will need to have 3 rows and 3 columns which can be represented by a 2D array. Each index within the gameboard array will represent a row, and each index that represents a row will itself be an array that has an index for each column. For example, if I need to access the cell in the center of the gameboard than I would target gameboard[1][1] (row 2, column 2).
+-----------------------------------------
 
-Each cell will begin by being populated with an empty button so that it can easily trigger click events. To populate each cell I can use a nested loop that iterates through the rows and columns of the gameboard and inserts a button. It may be helpful to give each button a unique data attribute so that it can be easily targetted. This process could be carried out as a method called init that is stored inside of a gameController module. This module will be responsible for handling the flow of the game.
+*** I need to decide how cell objects will function ***
 
-I will also need a way to represent the players in the game. For now I will make it a two player game, however I may extend functionality in the future to include the choice of playing a bot. Players can be created using a factory function that accepts name and letter as input and stores them as properties/methods. 
+The purpose of the cell objects are to store and update marker information within each cell of the gameboard. 
+
+I could have the cell object reside in the gameBoard module as a private object. I can create public methods that manipulate the cell objects within the gameBoard module via the private object.
+
+Marker values:
+    0 - Represents an empty cell
+    1 - PlayerX has inserted a marker
+    2 - PlayerO has inserted a marker
+
+cell{} methods will include getMarker that returns the value of it's marker variable, and placeMarker that updates the value of it's marker variable to the players marker value when called (will be called when corresponding cell is clicked).
+
+gameBoard Module --> cell inner-module(?) --> 
+
+const cell = () => {
+    let marker = 0;
+
+    // insert methods here
+    const getMarker = () => marker;
+
+    return { getMarker, etc, }
+}
+
+-----------------------------------------
+
+Next I will create a factory function called playerFactory that accepts the the parameters name and marker. 
 
 I want the user to be able to choose which letter they are playing (X or O) and input a name. Whichever player chooses X will always start the first game, however each time the play again button is clicked the starting player will alternate. 

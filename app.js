@@ -6,32 +6,43 @@ const gameBoard = (() => {
     const columns = 3;
     const board = [];
 
-    // Loop through the array, storing the object that the cell function returns in each index of the gameboard. This loop runs immediately to initialize the gameboard with cell objects that have no placed markers.
+    const cell = (() => {
+        /*     
+        Marker values:
+            0 - Represents an empty cell
+            1 - PlayerX has inserted a marker
+            2 - PlayerO has inserted a marker
+        */
+        const marker = 0;
+
+        /* 
+            Cell methods will include getMarker that returns the current value of it's marker variable, and placeMarker that updates the value of the marker variable to the players marker value when called.
+        */
+        const placeMarker = () => {};
+        const getMarker = () => marker;
+        return { placeMarker, getMarker };
+    })();
+
+    // Immediately loop through the board array calling the getMarker method to store the default marker value of the cell object in each index of the gameboard.
 
     for (let i = 0; i < rows; i++) {
         board[i] = [];
         for (let j = 0; j < columns; j++) {
-            board[i].push(/* insert cell function here */);
+            board[i].push(cell.getMarker());
         }
     }
 
-    /* 
-    
-    Marker values:
-        0 - Represents an empty cell
-        1 - PlayerX has inserted a marker
-        2 - PlayerO has inserted a marker
-
-    cell methods will include getMarker that returns the value of it's marker variable, and placeMarker that updates the value of it's the cells marker variable to the players marker value when called (will be called when corresponding cell is clicked).
-
-    */
-
     // The getBoard method returns the current state of the board
     const getBoard = () => board;
-
+    const getMarker = cell.getMarker();
     // Return public methods
-    return { getBoard };
+    return { getBoard, getMarker };
 })();
 
 // The playerFactory function generates player objects
 const playerFactory = (name, marker) => ({ name, marker });
+
+// test scripts
+
+console.log(gameBoard.getBoard());
+console.log(gameBoard.getMarker);
