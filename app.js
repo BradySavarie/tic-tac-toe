@@ -6,7 +6,7 @@ const gameBoard = (() => {
     const columns = 3;
     const board = [];
 
-    // Loop through the array, storing the object that the cell function returns in each cell of the gameboard. This loop runs immediately to initialize the gameboard with cell objects that have no placed markers.
+    // Loop through the array, storing the object that the cell function returns in each index of the gameboard. This loop runs immediately to initialize the gameboard with cell objects that have no placed markers.
 
     for (let i = 0; i < rows; i++) {
         board[i] = [];
@@ -28,6 +28,9 @@ const gameBoard = (() => {
 
     // The getBoard method returns the current state of the board
     const getBoard = () => board;
+
+    // Return public methods
+    return { getBoard };
 })();
 
 // The playerFactory function generates player objects
