@@ -40,7 +40,7 @@ const gameBoard = (() => {
 })();
 
 const displayController = (() => {
-    // these variables will be retrieved on input an stored in player1 and player2 objects
+    // these test variables will be retrieved on input and stored in playersData array
     const player1Name = 'Brady';
     const player1Marker = 1;
     const player2Name = 'Matt';
@@ -53,7 +53,7 @@ const gameController = (() => {
     // The playerFactory function generates player objects
     const playerFactory = (name, marker) => ({ name, marker });
 
-    // player objects data is retrieved from the displayController module and stored in the players array
+    // playersData array is retrieved from the displayController module and stored in the players array
     const players = [
         playerFactory(
             displayController.player1Name,
