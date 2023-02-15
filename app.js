@@ -65,9 +65,26 @@ const gameController = (() => {
         ),
     ];
 
-    return { players };
+    // currently writing the set turn function. still buggy
+    let activePlayer;
+    const setTurn = () => {
+        if (gameBoard.getMarker === 0) {
+            for (let i = 0; i < players.length; i++) {
+                if (players[i].marker === 1) {
+                    activePlayer = players[i];
+                    return;
+                }
+            }
+        } else {
+            activePlayer =
+                activePlayer === players[0] ? players[1] : players[0];
+        }
+    };
+    return { players, setTurn, activePlayer };
 })();
 
 // test scripts
 
-console.log(gameController.players);
+console.log(gameController.activePlayer);
+console.log(gameController.setTurn());
+console.log(gameController.activePlayer);

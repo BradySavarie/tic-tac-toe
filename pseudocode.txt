@@ -7,7 +7,29 @@ Main Components:
 
 Im going to start by creating a gameBoard module. Inside of the module an empty 2D array called board will be initialized along with variables representing the number of rows and columns on the board. A cell module will live within this scope and will be used to update and retrieve the marker values on each cell of the gameBoard. A nested for loop will run immediately after the cell module with the outer loop representing rows and the inner loop representing columns. It will call the cell modules getMarker method to set the default marker value of each cell on the gameBoard to 0. 
 
-I will need a gameController module that is responsible for handling the flow of the game. The first thing this module should do is create both player objects. To accomplish this I will create a factory function called playerFactory that accepts the parameters name and marker.
+I will need a gameController module that is responsible for handling the flow of the game, and a displayController module to retrieve data from users and display content once processed. The first action in the game is to retrieve player data from the users on submit. This data can be gathered via a getPlayerData method within the displayController module and stored in a publicly accessible playerData array. The gameController module will then call displayController.playerData[i] as playerFactory parameters and store the resulting objects in the players array. 
 
-I want the user to be able to choose which letter they are playing (X or O) and input a name. Whichever player chooses X will always start the first game, however each time the play again button is clicked the starting player will alternate. 
+Once I have player information I will need to identify which player is going to start the game. The player who's marker value is 1 will begin. I should create a method on the gameController module to check if the cell marker is 0 (no turns have been taken) and if it is then set the turn (somehow) to the player with marker value 1. If the marker value is not 0 than check the marker value to identify which player placed a marker last and then write a conditional toggle to switch turns to the other player.
 
+-----------------------------
+
+SWITCH TURNS
+
+let activePlayer;
+
+const setTurn = () => {
+    if (gameboard.getMarker() === 0) {
+        for (let i = 0; i < players.length; i++) {
+            if (players[i].marker === 1) {
+                activePlayer = players[i];
+            }
+        }
+    } else {
+        activePlayer = activePlayer === players[0] ? player[1] : player[0];
+    }
+};
+
+
+
+
+Whichever player chooses X will always start the first game, however each time the play again button is clicked the starting player will alternate. 
