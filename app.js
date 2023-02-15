@@ -65,7 +65,7 @@ const gameController = (() => {
         ),
     ];
 
-    return { playerFactory, players };
+    return { players };
 })();
 
 // test scripts
