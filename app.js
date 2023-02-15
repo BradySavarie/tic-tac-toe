@@ -1,7 +1,5 @@
-// The gameBoard module is responsible for storing information about and interacting with the game board.
-
+// The gameBoard module is responsible for updating and retrieving information about the state of the gameBoard
 const gameBoard = (() => {
-    // this 2D board array represents the current state of the game board
     const rows = 3;
     const columns = 3;
     const board = [];
@@ -23,7 +21,7 @@ const gameBoard = (() => {
         return { placeMarker, getMarker };
     })();
 
-    // Immediately loop through the board array calling the getMarker method to store the default marker value of the cell object in each index of the gameboard.
+    // Immediately loop through the board array calling the cell modules getMarker method to store its default marker value in each index of the gameboard.
 
     for (let i = 0; i < rows; i++) {
         board[i] = [];
@@ -32,17 +30,44 @@ const gameBoard = (() => {
         }
     }
 
+    // The getMarker property returns the current marker value within the cell module
+    const getMarker = cell.getMarker();
     // The getBoard method returns the current state of the board
     const getBoard = () => board;
-    const getMarker = cell.getMarker();
-    // Return public methods
+
+    // Reveal public methods
     return { getBoard, getMarker };
 })();
 
-// The playerFactory function generates player objects
-const playerFactory = (name, marker) => ({ name, marker });
+const displayController = (() => {
+    // these variables will be retrieved on input an stored in player1 and player2 objects
+    const player1Name = 'Brady';
+    const player1Marker = 1;
+    const player2Name = 'Matt';
+    const player2Marker = 2;
+
+    return { player1Name, player1Marker, player2Name, player2Marker };
+})();
+
+const gameController = (() => {
+    // The playerFactory function generates player objects
+    const playerFactory = (name, marker) => ({ name, marker });
+
+    // player objects data is retrieved from the displayController module and stored in the players array
+    const players = [
+        playerFactory(
+            displayController.player1Name,
+            displayController.player1Marker
+        ),
+        playerFactory(
+            displayController.player2Name,
+            displayController.player2Marker
+        ),
+    ];
+
+    return { playerFactory, players };
+})();
 
 // test scripts
 
-console.log(gameBoard.getBoard());
-console.log(gameBoard.getMarker);
+console.log(gameController.players);
