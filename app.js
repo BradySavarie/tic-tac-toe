@@ -65,26 +65,30 @@ const gameController = (() => {
         ),
     ];
 
-    // currently writing the set turn function. still buggy
     let activePlayer;
-    const setTurn = () => {
-        if (gameBoard.getMarker === 0) {
-            for (let i = 0; i < players.length; i++) {
-                if (players[i].marker === 1) {
-                    activePlayer = players[i];
-                    return;
-                }
+
+    // I need a method that returns the activePlayer, a method that switches turns, and a method that sets the turn to the player whos marker is 1 by default
+
+    const initializeActivePlayer = () => {
+        for (let i = 0; i < players.length; i++) {
+            if (players[i].marker === 1) {
+                activePlayer = players[i];
             }
-        } else {
-            activePlayer =
-                activePlayer === players[0] ? players[1] : players[0];
         }
     };
-    return { players, setTurn, activePlayer };
+
+    const switchTurns = () => {
+        activePlayer = activePlayer === players[0] ? players[1] : players[0];
+    };
+
+    const getActivePlayer = () => activePlayer;
+
+    return { initializeActivePlayer, switchTurns, getActivePlayer };
 })();
 
 // test scripts
 
-console.log(gameController.activePlayer);
-console.log(gameController.setTurn());
-console.log(gameController.activePlayer);
+gameController.initializeActivePlayer();
+console.log(gameController.getActivePlayer());
+gameController.switchTurns();
+console.log(gameController.getActivePlayer());
