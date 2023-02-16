@@ -49,59 +49,33 @@ const gameController = (() => {
 
 // The gameBoard module is responsible for updating and retrieving information about the state of the gameBoard
 const gameBoard = (() => {
+    // private properties
+
     const rows = 3;
     const columns = 3;
     const board = [];
+    let marker = 0;
 
-    const cell = (() => {
-        /*     
-        Marker values:
-            0 - Represents an empty cell
-            1 - PlayerX has inserted a marker
-            2 - PlayerO has inserted a marker
-        */
-        let marker = 0;
-
-        /* 
-            Cell methods will include getMarker that returns the current value of it's marker variable, and placeMarker that updates the value of the marker variable to the players marker value when called.
-        */
-
-        const getMarker = () => marker;
-
-        const updateMarker = () => {
-            marker = gameController.getActivePlayer().marker;
-        };
-
-        return { getMarker, updateMarker };
-    })();
-
-    // Immediately loop through the board array calling the cell modules getMarker method to store its default marker value in each index of the gameboard.
+    // Immediately loop through the board array to store the default marker value in each index of the gameboard.
 
     for (let i = 0; i < rows; i++) {
         board[i] = [];
         for (let j = 0; j < columns; j++) {
-            board[i].push(cell.getMarker());
+            board[i].push(marker);
         }
     }
 
-    // The getMarker property returns the current marker value within the cell module
-    const getMarker = () => cell.getMarker();
+    // Public methods
 
-    const updateMarker = () => cell.updateMarker();
-
-    const printMarker = (row, column) => {
-        board[row][column] = cell.getMarker();
-    };
-
-    const placeMarker = (row, column) => {
-        updateMarker();
-        printMarker(row, column);
-    };
-
-    // The getBoard method returns the current state of the board
     const getBoard = () => board;
 
-    // Reveal public methods and properties
+    const getMarker = () => marker;
+
+    const placeMarker = (row, column) => {
+        marker = gameController.getActivePlayer().marker;
+        board[row][column] = marker;
+    };
+
     return { getBoard, getMarker, placeMarker };
 })();
 
