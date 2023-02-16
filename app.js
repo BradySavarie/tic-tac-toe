@@ -1,46 +1,6 @@
-// The gameBoard module is responsible for updating and retrieving information about the state of the gameBoard
-const gameBoard = (() => {
-    const rows = 3;
-    const columns = 3;
-    const board = [];
-
-    const cell = (() => {
-        /*     
-        Marker values:
-            0 - Represents an empty cell
-            1 - PlayerX has inserted a marker
-            2 - PlayerO has inserted a marker
-        */
-        const marker = 0;
-
-        /* 
-            Cell methods will include getMarker that returns the current value of it's marker variable, and placeMarker that updates the value of the marker variable to the players marker value when called.
-        */
-        const placeMarker = () => {};
-        const getMarker = () => marker;
-        return { placeMarker, getMarker };
-    })();
-
-    // Immediately loop through the board array calling the cell modules getMarker method to store its default marker value in each index of the gameboard.
-
-    for (let i = 0; i < rows; i++) {
-        board[i] = [];
-        for (let j = 0; j < columns; j++) {
-            board[i].push(cell.getMarker());
-        }
-    }
-
-    // The getMarker property returns the current marker value within the cell module
-    const getMarker = cell.getMarker();
-    // The getBoard method returns the current state of the board
-    const getBoard = () => board;
-
-    // Reveal public methods
-    return { getBoard, getMarker };
-})();
-
 const displayController = (() => {
     // these test variables will be retrieved on input and stored in playersData array
+
     const player1Name = 'Brady';
     const player1Marker = 1;
     const player2Name = 'Matt';
@@ -54,6 +14,7 @@ const gameController = (() => {
     const playerFactory = (name, marker) => ({ name, marker });
 
     // playersData array is retrieved from the displayController module and stored in the players array
+
     const players = [
         playerFactory(
             displayController.player1Name,
@@ -86,9 +47,68 @@ const gameController = (() => {
     return { initializeActivePlayer, switchTurns, getActivePlayer };
 })();
 
+// The gameBoard module is responsible for updating and retrieving information about the state of the gameBoard
+const gameBoard = (() => {
+    const rows = 3;
+    const columns = 3;
+    const board = [];
+
+    const cell = (() => {
+        /*     
+        Marker values:
+            0 - Represents an empty cell
+            1 - PlayerX has inserted a marker
+            2 - PlayerO has inserted a marker
+        */
+        let marker = 0;
+
+        /* 
+            Cell methods will include getMarker that returns the current value of it's marker variable, and placeMarker that updates the value of the marker variable to the players marker value when called.
+        */
+
+        const getMarker = () => marker;
+
+        const updateMarker = () => {
+            marker = gameController.getActivePlayer().marker;
+        };
+
+        return { getMarker, updateMarker };
+    })();
+
+    // Immediately loop through the board array calling the cell modules getMarker method to store its default marker value in each index of the gameboard.
+
+    for (let i = 0; i < rows; i++) {
+        board[i] = [];
+        for (let j = 0; j < columns; j++) {
+            board[i].push(cell.getMarker());
+        }
+    }
+
+    // The getMarker property returns the current marker value within the cell module
+    const getMarker = () => cell.getMarker();
+
+    const updateMarker = () => cell.updateMarker();
+
+    const printMarker = (row, column) => {
+        board[row][column] = cell.getMarker();
+    };
+
+    const placeMarker = (row, column) => {
+        updateMarker();
+        printMarker(row, column);
+    };
+
+    // The getBoard method returns the current state of the board
+    const getBoard = () => board;
+
+    // Reveal public methods and properties
+    return { getBoard, getMarker, placeMarker };
+})();
+
 // test scripts
 
 gameController.initializeActivePlayer();
-console.log(gameController.getActivePlayer());
-gameController.switchTurns();
-console.log(gameController.getActivePlayer());
+console.log(gameBoard.getMarker());
+gameBoard.placeMarker(1, 1);
+console.log(gameBoard.getMarker());
+console.log(gameBoard.getBoard());
