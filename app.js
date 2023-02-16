@@ -1,34 +1,29 @@
 const displayController = (() => {
-    // these test variables will be retrieved on input and stored in playersData array
+    // This data will not be hard coded once the UI is built
+    const playersData = ['Brady', 1, 'Matt', 2];
 
-    const player1Name = 'Brady';
-    const player1Marker = 1;
-    const player2Name = 'Matt';
-    const player2Marker = 2;
-
-    return { player1Name, player1Marker, player2Name, player2Marker };
+    return { playersData };
 })();
 
 const gameController = (() => {
-    // The playerFactory function generates player objects
+    // private properties & methods
+
+    const players = [];
+    let activePlayer;
     const playerFactory = (name, marker) => ({ name, marker });
 
-    // playersData array is retrieved from the displayController module and stored in the players array
+    // public methods
 
-    const players = [
-        playerFactory(
-            displayController.player1Name,
-            displayController.player1Marker
-        ),
-        playerFactory(
-            displayController.player2Name,
-            displayController.player2Marker
-        ),
-    ];
-
-    let activePlayer;
-
-    // I need a method that returns the activePlayer, a method that switches turns, and a method that sets the turn to the player whos marker is 1 by default
+    const createPlayers = () => {
+        players[0] = playerFactory(
+            displayController.playersData[0],
+            displayController.playersData[1]
+        );
+        players[1] = playerFactory(
+            displayController.playersData[2],
+            displayController.playersData[3]
+        );
+    };
 
     const initializeActivePlayer = () => {
         for (let i = 0; i < players.length; i++) {
@@ -44,7 +39,12 @@ const gameController = (() => {
 
     const getActivePlayer = () => activePlayer;
 
-    return { initializeActivePlayer, switchTurns, getActivePlayer };
+    return {
+        createPlayers,
+        initializeActivePlayer,
+        switchTurns,
+        getActivePlayer,
+    };
 })();
 
 // The gameBoard module is responsible for updating and retrieving information about the state of the gameBoard
@@ -81,6 +81,7 @@ const gameBoard = (() => {
 
 // test scripts
 
+gameController.createPlayers();
 gameController.initializeActivePlayer();
 console.log(gameBoard.getMarker());
 gameBoard.placeMarker(1, 1);
