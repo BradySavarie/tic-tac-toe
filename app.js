@@ -1,3 +1,4 @@
+// The displayController module is responsible for receiving input from users and displaying processed information
 const displayController = (() => {
     // This data will not be hard coded once the UI is built
     const playersData = ['Brady', 1, 'Matt', 2];
@@ -5,6 +6,7 @@ const displayController = (() => {
     return { playersData };
 })();
 
+// The gameController module is responsible for directing the flow of the game
 const gameController = (() => {
     // private properties & methods
 
@@ -56,16 +58,17 @@ const gameBoard = (() => {
     const board = [];
     let marker = 0;
 
-    // Immediately loop through the board array to store the default marker value in each index of the gameboard.
-
-    for (let i = 0; i < rows; i++) {
-        board[i] = [];
-        for (let j = 0; j < columns; j++) {
-            board[i].push(marker);
-        }
-    }
-
     // Public methods
+
+    const initializeBoard = () => {
+        marker = 0;
+        for (let i = 0; i < rows; i++) {
+            board[i] = [];
+            for (let j = 0; j < columns; j++) {
+                board[i].push(marker);
+            }
+        }
+    };
 
     const getBoard = () => board;
 
@@ -76,14 +79,11 @@ const gameBoard = (() => {
         board[row][column] = marker;
     };
 
-    return { getBoard, getMarker, placeMarker };
+    return { initializeBoard, getBoard, getMarker, placeMarker };
 })();
 
 // test scripts
 
 gameController.createPlayers();
+gameBoard.initializeBoard();
 gameController.initializeActivePlayer();
-console.log(gameBoard.getMarker());
-gameBoard.placeMarker(1, 1);
-console.log(gameBoard.getMarker());
-console.log(gameBoard.getBoard());
