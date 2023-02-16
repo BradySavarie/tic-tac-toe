@@ -1,0 +1,7 @@
+user clicks start game
+player is prompted for input data (names and markers)
+data is stored in playerData array on submit
+createPlayers method is run
+initializeBoard method is run
+initializeActivePlayer method is run
+
