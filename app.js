@@ -1,3 +1,36 @@
+// The gameBoard module is responsible for updating and retrieving information about the state of the gameBoard
+const gameBoard = (() => {
+    // private properties
+
+    const rows = 3;
+    const columns = 3;
+    const board = [];
+    let marker = 0;
+
+    // Public methods
+
+    const initializeBoard = () => {
+        marker = 0;
+        for (let i = 0; i < rows; i++) {
+            board[i] = [];
+            for (let j = 0; j < columns; j++) {
+                board[i].push(marker);
+            }
+        }
+    };
+
+    const getBoard = () => board;
+
+    const getMarker = () => marker;
+
+    const placeMarker = (row, column, activePlayer) => {
+        marker = activePlayer.marker;
+        board[row][column] = marker;
+    };
+
+    return { initializeBoard, getBoard, getMarker, placeMarker };
+})();
+
 // The gameController module contains methods that control the flow of the game
 const gameController = (() => {
     // private properties & methods
@@ -27,45 +60,20 @@ const gameController = (() => {
 
     const getActivePlayer = () => activePlayer;
 
+    const playRound = (selectedRow, selectedColumn) => {
+        if (gameBoard.getBoard()[selectedRow][selectedColumn] === 0) {
+            gameBoard.placeMarker(selectedRow, selectedColumn, activePlayer);
+            switchTurns();
+        }
+    };
+
     return {
         createPlayers,
         initializeActivePlayer,
         switchTurns,
         getActivePlayer,
+        playRound,
     };
-})();
-
-// The gameBoard module is responsible for updating and retrieving information about the state of the gameBoard
-const gameBoard = (() => {
-    // private properties
-
-    const rows = 3;
-    const columns = 3;
-    const board = [];
-    let marker = 0;
-
-    // Public methods
-
-    const initializeBoard = () => {
-        marker = 0;
-        for (let i = 0; i < rows; i++) {
-            board[i] = [];
-            for (let j = 0; j < columns; j++) {
-                board[i].push(marker);
-            }
-        }
-    };
-
-    const getBoard = () => board;
-
-    const getMarker = () => marker;
-
-    const placeMarker = (row, column) => {
-        marker = gameController.getActivePlayer().marker;
-        board[row][column] = marker;
-    };
-
-    return { initializeBoard, getBoard, getMarker, placeMarker };
 })();
 
 // The displayController module is responsible for receiving input from users and displaying processed information
@@ -102,11 +110,9 @@ const displayController = (() => {
     function boardClickHandler(e) {
         const selectedRow = e.target.dataset.row;
         const selectedColumn = e.target.dataset.column;
-
         if (!selectedRow || !selectedColumn) return;
-        console.log(selectedRow);
-        console.log(selectedColumn);
         gameController.playRound(selectedRow, selectedColumn);
+        renderDisplay();
     }
 
     // Listen for clicks on gameBoard
@@ -118,5 +124,3 @@ const displayController = (() => {
     gameBoard.initializeBoard();
     renderDisplay();
 })();
-
-// test scripts
