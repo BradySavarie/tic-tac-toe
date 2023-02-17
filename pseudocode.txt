@@ -4,4 +4,7 @@ data is stored in playerData array on submit
 createPlayers method is run
 initializeBoard method is run
 initializeActivePlayer method is run
-
+User clicks on a cell triggering a playRound method
+playRound function places a marker, checks for end game conditions (win/draw)
+If game continues the turns are switched and the updated board is displayed
+else end game message and play again button are displayed
