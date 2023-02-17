@@ -1,22 +1,16 @@
-// The gameController module is responsible for directing the flow of the game
+// The gameController module contains methods that control the flow of the game
 const gameController = (() => {
     // private properties & methods
-
     const players = [];
-    let activePlayer;
+    const playersData = ['Brady', 1, 'Matt', 2];
     const playerFactory = (name, marker) => ({ name, marker });
+    let activePlayer;
 
     // public methods
 
     const createPlayers = () => {
-        players[0] = playerFactory(
-            displayController.playersData[0],
-            displayController.playersData[1]
-        );
-        players[1] = playerFactory(
-            displayController.playersData[2],
-            displayController.playersData[3]
-        );
+        players[0] = playerFactory(playersData[0], playersData[1]);
+        players[1] = playerFactory(playersData[2], playersData[3]);
     };
 
     const initializeActivePlayer = () => {
@@ -80,22 +74,34 @@ const displayController = (() => {
     const boardDiv = document.querySelector('.board');
     const turnHeader = document.querySelector('.turn');
 
-    const renderBoard = () => {
+    const renderDisplay = () => {
+        // Clear board
+        boardDiv.textContent = '';
+
+        // Get current board state & active player
         const currentBoard = gameBoard.getBoard();
+        const activePlayer = gameController.getActivePlayer();
+
+        // Render turn indicator
+        turnHeader.textContent = `${activePlayer.name}'s Turn`;
+
+        // Render board
         currentBoard.forEach((row) => {
-            row.forEach(() => {
+            row.forEach((marker, index) => {
                 const cellButton = document.createElement('button');
                 cellButton.classList.add('cell');
+                cellButton.dataset.column = index;
+                cellButton.textContent = marker;
                 boardDiv.appendChild(cellButton);
             });
         });
     };
 
     // Initial Setup
+    gameController.createPlayers();
+    gameController.initializeActivePlayer();
     gameBoard.initializeBoard();
-    renderBoard();
-    // This data will not be hard coded once the UI is built
-    const playersData = ['Brady', 1, 'Matt', 2];
+    renderDisplay();
 })();
 
 // test scripts
