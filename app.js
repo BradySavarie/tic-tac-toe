@@ -1,11 +1,3 @@
-// The displayController module is responsible for receiving input from users and displaying processed information
-const displayController = (() => {
-    // This data will not be hard coded once the UI is built
-    const playersData = ['Brady', 1, 'Matt', 2];
-
-    return { playersData };
-})();
-
 // The gameController module is responsible for directing the flow of the game
 const gameController = (() => {
     // private properties & methods
@@ -82,8 +74,28 @@ const gameBoard = (() => {
     return { initializeBoard, getBoard, getMarker, placeMarker };
 })();
 
-// test scripts
+// The displayController module is responsible for receiving input from users and displaying processed information
+const displayController = (() => {
+    // Cache DOM
+    const boardDiv = document.querySelector('.board');
+    const turnHeader = document.querySelector('.turn');
 
-gameController.createPlayers();
-gameBoard.initializeBoard();
-gameController.initializeActivePlayer();
+    const renderBoard = () => {
+        const currentBoard = gameBoard.getBoard();
+        currentBoard.forEach((row) => {
+            row.forEach(() => {
+                const cellButton = document.createElement('button');
+                cellButton.classList.add('cell');
+                boardDiv.appendChild(cellButton);
+            });
+        });
+    };
+
+    // Initial Setup
+    gameBoard.initializeBoard();
+    renderBoard();
+    // This data will not be hard coded once the UI is built
+    const playersData = ['Brady', 1, 'Matt', 2];
+})();
+
+// test scripts
