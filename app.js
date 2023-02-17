@@ -86,16 +86,31 @@ const displayController = (() => {
         turnHeader.textContent = `${activePlayer.name}'s Turn`;
 
         // Render board
-        currentBoard.forEach((row) => {
-            row.forEach((marker, index) => {
+        currentBoard.forEach((row, rowIndex) => {
+            row.forEach((marker, columnIndex) => {
                 const cellButton = document.createElement('button');
                 cellButton.classList.add('cell');
-                cellButton.dataset.column = index;
+                cellButton.dataset.row = rowIndex;
+                cellButton.dataset.column = columnIndex;
                 cellButton.textContent = marker;
                 boardDiv.appendChild(cellButton);
             });
         });
     };
+
+    // Respond to click events on gameBoard
+    function boardClickHandler(e) {
+        const selectedRow = e.target.dataset.row;
+        const selectedColumn = e.target.dataset.column;
+
+        if (!selectedRow || !selectedColumn) return;
+        console.log(selectedRow);
+        console.log(selectedColumn);
+        gameController.playRound(selectedRow, selectedColumn);
+    }
+
+    // Listen for clicks on gameBoard
+    boardDiv.addEventListener('click', boardClickHandler);
 
     // Initial Setup
     gameController.createPlayers();
