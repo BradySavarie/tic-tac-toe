@@ -86,7 +86,7 @@ const gameController = (() => {
                 }
             }
             if (win === true) {
-                console.log('win');
+                console.log('win horizontal');
                 break;
             }
         }
@@ -100,7 +100,7 @@ const gameController = (() => {
                 }
             }
             if (win === true) {
-                console.log('win');
+                console.log('win vertical');
                 break;
             }
         }
@@ -122,6 +122,7 @@ const gameController = (() => {
             win = true;
             if (!(currentBoard[i][rows - j] === activePlayer.marker)) {
                 win = false;
+                break;
             }
             j++;
         }
