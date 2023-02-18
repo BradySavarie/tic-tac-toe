@@ -46,11 +46,13 @@ const gameBoard = (() => {
 // The gameController module contains methods that control the flow of the game
 const gameController = (() => {
     // private properties & methods
-    const players = [];
     const playersData = ['Brady', 1, 'Matt', 2];
     const playerFactory = (name, marker) => ({ name, marker });
-    let activePlayer;
+    const players = [];
+    const rows = gameBoard.getRows();
+    const columns = gameBoard.getColumns();
     const currentBoard = gameBoard.getBoard();
+    let activePlayer;
     let win;
 
     // public methods
@@ -68,13 +70,13 @@ const gameController = (() => {
         }
     };
 
+    const getActivePlayer = () => activePlayer;
+
     const switchTurns = () => {
         activePlayer = activePlayer === players[0] ? players[1] : players[0];
     };
 
-    const getActivePlayer = () => activePlayer;
-
-    const checkHorizontal = (rows, columns) => {
+    const checkHorizontal = () => {
         for (let i = 0; i < rows; i++) {
             win = true;
             for (let j = 0; j < columns; j++) {
@@ -90,7 +92,7 @@ const gameController = (() => {
         }
     };
 
-    const checkVertical = (rows, columns) => {
+    const checkVertical = () => {
         for (let i = 0; i < columns; i++) {
             win = true;
             for (let j = 0; j < rows; j++) {
@@ -106,7 +108,7 @@ const gameController = (() => {
         }
     };
 
-    const checkLeftDiagonal = (rows) => {
+    const checkLeftDiagonal = () => {
         for (let i = 0; i < rows; i++) {
             win = true;
             if (!(currentBoard[i][i] === activePlayer.marker)) {
@@ -119,7 +121,7 @@ const gameController = (() => {
         }
     };
 
-    const checkRightDiagonal = (rows) => {
+    const checkRightDiagonal = () => {
         let j = 1;
         for (let i = 0; i < rows; i++) {
             win = true;
@@ -134,17 +136,17 @@ const gameController = (() => {
         }
     };
 
-    const checkWin = (rows, columns) => {
-        checkHorizontal(rows, columns);
-        checkVertical(rows, columns);
-        checkLeftDiagonal(rows);
-        checkRightDiagonal(rows, columns);
+    const checkWin = () => {
+        checkHorizontal();
+        checkVertical();
+        checkLeftDiagonal();
+        checkRightDiagonal();
     };
 
     const playRound = (selectedRow, selectedColumn) => {
         if (gameBoard.getBoard()[selectedRow][selectedColumn] === 0) {
             gameBoard.placeMarker(selectedRow, selectedColumn, activePlayer);
-            checkWin(gameBoard.getRows(), gameBoard.getColumns());
+            checkWin();
             switchTurns();
         }
     };
