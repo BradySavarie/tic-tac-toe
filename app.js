@@ -1,13 +1,14 @@
 // The gameBoard module is responsible for updating and retrieving information about the state of the gameBoard
 const gameBoard = (() => {
-    // private properties
+    // Private
 
-    const rows = 3;
-    const columns = 3;
     const board = [];
     let marker = 0;
 
-    // Public methods
+    // Public
+
+    const rows = 3;
+    const columns = 3;
 
     const initializeBoard = () => {
         marker = 0;
@@ -19,6 +20,10 @@ const gameBoard = (() => {
         }
     };
 
+    const getRows = () => rows;
+
+    const getColumns = () => columns;
+
     const getBoard = () => board;
 
     const getMarker = () => marker;
@@ -28,7 +33,14 @@ const gameBoard = (() => {
         board[row][column] = marker;
     };
 
-    return { initializeBoard, getBoard, getMarker, placeMarker };
+    return {
+        initializeBoard,
+        getBoard,
+        getRows,
+        getColumns,
+        getMarker,
+        placeMarker,
+    };
 })();
 
 // The gameController module contains methods that control the flow of the game
@@ -60,9 +72,40 @@ const gameController = (() => {
 
     const getActivePlayer = () => activePlayer;
 
+    const checkWin = (rows, columns) => {
+        // get current state of board
+        const currentBoard = gameBoard.getBoard();
+        console.log(activePlayer.marker);
+        // check horizontal lines
+        // loop through the column values for each row, returning if the value does not equal the activeplayers marker
+        let win;
+
+        for (let i = 0; i < rows; i++) {
+            win = true;
+            for (let j = 0; j < columns; j++) {
+                if (!(currentBoard[i][j] === activePlayer.marker)) {
+                    win = false;
+                    break;
+                }
+            }
+            if (win === true) {
+                console.log('win');
+                break;
+            }
+        }
+        // check vertical lines
+        // loop through the row values for each column, returning if the value does not equal the activePlayers marker
+        // check diagonals
+        // loop through row and column values simultaneously, returning if the value does not equal the players marker
+        // start from beginning of array for left diagonal
+        // start from end of array for right diagonal
+        // play win sequence here if method reaches this far
+    };
+
     const playRound = (selectedRow, selectedColumn) => {
         if (gameBoard.getBoard()[selectedRow][selectedColumn] === 0) {
             gameBoard.placeMarker(selectedRow, selectedColumn, activePlayer);
+            checkWin(gameBoard.getRows(), gameBoard.getColumns());
             switchTurns();
         }
     };
