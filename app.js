@@ -73,13 +73,10 @@ const gameController = (() => {
     const getActivePlayer = () => activePlayer;
 
     const checkWin = (rows, columns) => {
-        // get current state of board
         const currentBoard = gameBoard.getBoard();
-        console.log(activePlayer.marker);
-        // check horizontal lines
-        // loop through the column values for each row, returning if the value does not equal the activeplayers marker
         let win;
 
+        // check horizontal lines
         for (let i = 0; i < rows; i++) {
             win = true;
             for (let j = 0; j < columns; j++) {
@@ -94,12 +91,43 @@ const gameController = (() => {
             }
         }
         // check vertical lines
-        // loop through the row values for each column, returning if the value does not equal the activePlayers marker
-        // check diagonals
-        // loop through row and column values simultaneously, returning if the value does not equal the players marker
-        // start from beginning of array for left diagonal
-        // start from end of array for right diagonal
-        // play win sequence here if method reaches this far
+        for (let i = 0; i < columns; i++) {
+            win = true;
+            for (let j = 0; j < rows; j++) {
+                if (!(currentBoard[j][i] === activePlayer.marker)) {
+                    win = false;
+                    break;
+                }
+            }
+            if (win === true) {
+                console.log('win');
+                break;
+            }
+        }
+        // check left diagonal
+        for (let i = 0; i < rows; i++) {
+            win = true;
+            if (!(currentBoard[i][i] === activePlayer.marker)) {
+                win = false;
+                break;
+            }
+        }
+        if (win === true) {
+            console.log('win left diagonal');
+        }
+
+        // check right diagonal
+        let j = 1;
+        for (let i = 0; i < rows; i++) {
+            win = true;
+            if (!(currentBoard[i][rows - j] === activePlayer.marker)) {
+                win = false;
+            }
+            j++;
+        }
+        if (win === true) {
+            console.log('win right diagonal');
+        }
     };
 
     const playRound = (selectedRow, selectedColumn) => {
