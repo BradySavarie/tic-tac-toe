@@ -7,6 +7,5 @@ Clicking the start game button generates the in-game screen and runs all initial
 This screen will persist (with the addition of markers on the grid of course) until a win or draw state is reached. When this state is reached a modal will pop up that describes the outcome of the game. "Player X wins!" for example. A New Game button will be inside this modal that initializes the board and increments a score counter that is displayed below the gameboard. rinse and repeat.
 
 NEXT STEPS:
- - Write a draw method
  - Learn how to use Tailwind
  - Work on the design for the pre-game screen

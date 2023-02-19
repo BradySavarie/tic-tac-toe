@@ -173,8 +173,8 @@ const gameController = (() => {
 // The displayController module is responsible for receiving input from users and displaying processed information
 const displayController = (() => {
     // Cache DOM
-    const boardDiv = document.querySelector('.board');
-    const turnHeader = document.querySelector('.turn');
+    const boardDiv = document.querySelector('#board');
+    const turnHeader = document.querySelector('#turn');
 
     const renderDisplay = () => {
         // Clear board
@@ -218,5 +218,3 @@ const displayController = (() => {
     gameBoard.initializeBoard();
     renderDisplay();
 })();
-
-// I NEED A DRAW METHOD STILL
