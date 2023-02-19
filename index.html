@@ -8,60 +8,81 @@
         <link rel="stylesheet" href="css/main.css" />
         <script src="./app.js" defer></script>
     </head>
+
     <body>
         <div
             id="pre-game_screen"
-            class="outline outline-1 outline-black flex flex-col h-screen justify-center items-center"
+            class="flex h-screen justify-center items-center"
         >
-            <h1 class="text-3xl">Tic-Tac-Toe</h1>
-            <form>
-                <div>
-                    <div id="player1">
-                        <input
-                            id="player1_name"
-                            name="player1_name"
-                            type="text"
-                            class="outline"
-                        />
-                        <div id="markers_1">
+            <div id="container" class="flex gap-6 flex-col">
+                <h1 class="text-7xl text-center font-Josefin">Tic-Tac-Toe</h1>
+                <form>
+                    <div class="flex gap-4">
+                        <div id="player1" class="player_card">
+                            <div
+                                style="
+                                    width: 100%;
+                                    height: 0;
+                                    padding-bottom: 100%;
+                                    position: relative;
+                                "
+                            >
+                                <iframe
+                                    src="https://giphy.com/embed/RhrAi0KejGlYbpanuQ"
+                                    width="100%"
+                                    height="100%"
+                                    style="position: absolute"
+                                    frameborder="0"
+                                    allowfullscreen
+                                ></iframe>
+                            </div>
+                            <label
+                                for="player1_name"
+                                class="font-bold text-xl text-center"
+                                >Name</label
+                            >
                             <input
-                                id="x_1"
-                                name="marker_button_1"
-                                type="radio"
+                                id="player1_name"
+                                name="player1_name"
+                                type="text"
+                                class="outline text-center"
+                                placeholder="Player X"
                             />
-                            <label for="x_1">X</label>
+                        </div>
+                        <div id="player2" class="player_card">
+                            <div
+                                style="
+                                    width: 100%;
+                                    height: 0;
+                                    padding-bottom: 100%;
+                                    position: relative;
+                                "
+                            >
+                                <iframe
+                                    src="https://giphy.com/embed/XaGBXxuqn5Uk5UhqG3"
+                                    width="100%"
+                                    height="100%"
+                                    style="position: absolute"
+                                    frameborder="0"
+                                    allowfullscreen
+                                ></iframe>
+                            </div>
+                            <label
+                                for="player2_name"
+                                class="font-bold text-xl text-center"
+                                >Name</label
+                            >
                             <input
-                                id="o_1"
-                                name="marker_button_1"
-                                type="radio"
+                                id="player2_name"
+                                name="player2_name"
+                                type="text"
+                                class="outline text-center"
+                                placeholder="Player O"
                             />
-                            <label for="o_1">O</label>
                         </div>
                     </div>
-                    <div id="player2">
-                        <input
-                            id="player2_name"
-                            name="player2_name"
-                            type="text"
-                            class="outline"
-                        />
-                        <div id="markers_2">
-                            <input
-                                id="x_2"
-                                name="marker_button_2"
-                                type="radio"
-                            />
-                            <label for="x_2">X</label>
-                            <input
-                                id="o_2"
-                                name="marker_button_2"
-                                type="radio"
-                            />
-                            <label for="o_2">O</label>
-                        </div>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
         <div id="in-game_screen" class="hidden">
             <h1 id="turn" class="text-3xl"></h1>

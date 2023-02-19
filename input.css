@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.player_card {
+    @apply flex flex-col gap-2 border-2 shadow-lg border-black p-3 rounded-md;
+}
