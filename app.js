@@ -143,10 +143,20 @@ const gameController = (() => {
         checkRightDiagonal();
     };
 
+    const checkDraw = () => {
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < columns; j++) {
+                if (currentBoard[i][j] === 0) return;
+            }
+        }
+        console.log('draw');
+    };
+
     const playRound = (selectedRow, selectedColumn) => {
-        if (gameBoard.getBoard()[selectedRow][selectedColumn] === 0) {
+        if (currentBoard[selectedRow][selectedColumn] === 0) {
             gameBoard.placeMarker(selectedRow, selectedColumn, activePlayer);
             checkWin();
+            checkDraw();
             switchTurns();
         }
     };
@@ -208,3 +218,5 @@ const displayController = (() => {
     gameBoard.initializeBoard();
     renderDisplay();
 })();
+
+// I NEED A DRAW METHOD STILL

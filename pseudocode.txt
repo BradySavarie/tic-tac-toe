@@ -1,13 +1,12 @@
-user clicks start game
-player is prompted for input data (names and markers)
-data is stored in playerData array on submit
-createPlayers method is run
-Okay the logic of the game is basically sorted out now.
-
-Next step is to decide how I want the UI to function so that I can begin displaying the correct elements on the screen depending on game state
+UI Description
 
 To start, I would like a pre-game screen. The screen will contain a title header, two cards that hold the player information, and a start game button. Each player card will have an avatar (either an svg or a gif depending on what source materials I can find), a name text input, and a marker selection toggle. The name text input will have player1 an player2 as placeholder values, and player1 will have X selected as the default marker. When a player selects a marker value it automatically sets the complimentary value for the opposing player. Either player should be able to toggle the values on click.
 
 Clicking the start game button generates the in-game screen and runs all initializing functions. The title header will be replaces with the players names, and the gameboard itself will be generated with empty marker values in the center of the screen. The active player will be indicated visually by some sort of color change or scale up rather than updating text content on a turn header. The Start Game button will be replaced by a Restart Game button that sets the board back up to its initial state. 
 
 This screen will persist (with the addition of markers on the grid of course) until a win or draw state is reached. When this state is reached a modal will pop up that describes the outcome of the game. "Player X wins!" for example. A New Game button will be inside this modal that initializes the board and increments a score counter that is displayed below the gameboard. rinse and repeat.
+
+NEXT STEPS:
+ - Write a draw method
+ - Learn how to use Tailwind
+ - Work on the design for the pre-game screen
