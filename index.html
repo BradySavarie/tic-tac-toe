@@ -16,7 +16,7 @@
         >
             <div class="flex gap-4 flex-col">
                 <h1 class="text-7xl text-center font-Josefin">Tic-Tac-Toe</h1>
-                <form>
+                <form id="pre-game_form">
                     <div
                         class="flex flex-col gap-6 justify-center items-center font-Josefin"
                     >
@@ -47,10 +47,10 @@
                                     >
                                     <input
                                         id="player1_name"
-                                        name="player1_name"
+                                        name="player1"
+                                        value="Player X"
                                         type="text"
                                         class="rounded-md text-center focus:outline-cyan-100 outline-2"
-                                        placeholder="Player X"
                                         autocomplete="off"
                                     />
                                 </div>
@@ -81,10 +81,10 @@
                                     >
                                     <input
                                         id="player2_name"
-                                        name="player2_name"
+                                        name="player2"
+                                        value="Player O"
                                         type="text"
                                         class="rounded-md text-center focus:outline-cyan-100 outline-2"
-                                        placeholder="Player O"
                                         autocomplete="off"
                                     />
                                 </div>

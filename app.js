@@ -46,7 +46,7 @@ const gameBoard = (() => {
 // The gameController module contains methods that control the flow of the game
 const gameController = (() => {
     // private properties & methods
-    const playersData = ['Brady', 1, 'Matt', 2];
+    const playersData = ['', 'X', '', 'O'];
     const playerFactory = (name, marker) => ({ name, marker });
     const players = [];
     const rows = gameBoard.getRows();
@@ -64,7 +64,7 @@ const gameController = (() => {
 
     const initializeActivePlayer = () => {
         for (let i = 0; i < players.length; i++) {
-            if (players[i].marker === 1) {
+            if (players[i].marker === 'X') {
                 activePlayer = players[i];
             }
         }
@@ -162,6 +162,7 @@ const gameController = (() => {
     };
 
     return {
+        playersData,
         createPlayers,
         initializeActivePlayer,
         switchTurns,
@@ -175,6 +176,7 @@ const displayController = (() => {
     // Cache DOM
     const boardDiv = document.querySelector('#board');
     const turnHeader = document.querySelector('#turn');
+    const preGameForm = document.querySelector('#pre-game_screen');
 
     const renderDisplay = () => {
         // Clear board
@@ -200,6 +202,16 @@ const displayController = (() => {
         });
     };
 
+    // Get player names from pre-game form
+    function storePlayersData(form) {
+        const formData = new FormData(form);
+        const data = formData.entries();
+        const names = Object.fromEntries(data);
+        gameController.playersData[0] = names.player1;
+        gameController.playersData[2] = names.player2;
+        console.log(gameController.playersData);
+    }
+
     // Respond to click events on gameBoard
     function boardClickHandler(e) {
         const selectedRow = e.target.dataset.row;
@@ -209,12 +221,19 @@ const displayController = (() => {
         renderDisplay();
     }
 
+    // Get player names via pre-game form submit
+    function preGameFormSubmitHandler(e) {
+        e.preventDefault();
+        storePlayersData(e.target);
+        gameController.createPlayers();
+        gameController.initializeActivePlayer();
+        gameBoard.initializeBoard();
+        renderDisplay();
+    }
+
     // Listen for clicks on gameBoard
     boardDiv.addEventListener('click', boardClickHandler);
 
-    // Initial Setup
-    gameController.createPlayers();
-    gameController.initializeActivePlayer();
-    gameBoard.initializeBoard();
-    renderDisplay();
+    // Listen for pre-game form submit
+    preGameForm.addEventListener('submit', preGameFormSubmitHandler);
 })();
