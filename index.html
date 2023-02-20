@@ -14,7 +14,7 @@
             id="pre-game_screen"
             class="flex h-screen justify-center items-center bg-gradient-to-r from-white to-slate-50"
         >
-            <div class="flex gap-6 flex-col">
+            <div class="flex gap-4 flex-col">
                 <h1 class="text-7xl text-center font-Josefin">Tic-Tac-Toe</h1>
                 <form>
                     <div
@@ -39,7 +39,7 @@
                                         allowfullscreen
                                     ></iframe>
                                 </div>
-                                <div class="flex flex-col">
+                                <div class="flex flex-col gap-1">
                                     <label
                                         for="player1_name"
                                         class="font-bold text-xl text-center"
@@ -49,8 +49,9 @@
                                         id="player1_name"
                                         name="player1_name"
                                         type="text"
-                                        class="outline text-center"
+                                        class="rounded-md text-center focus:outline-cyan-100 outline-2"
                                         placeholder="Player X"
+                                        autocomplete="off"
                                     />
                                 </div>
                             </div>
@@ -72,7 +73,7 @@
                                         allowfullscreen
                                     ></iframe>
                                 </div>
-                                <div class="flex flex-col">
+                                <div class="flex flex-col gap-1">
                                     <label
                                         for="player2_name"
                                         class="font-bold text-xl text-center"
@@ -82,8 +83,9 @@
                                         id="player2_name"
                                         name="player2_name"
                                         type="text"
-                                        class="outline text-center"
+                                        class="rounded-md text-center focus:outline-cyan-100 outline-2"
                                         placeholder="Player O"
+                                        autocomplete="off"
                                     />
                                 </div>
                             </div>
@@ -91,7 +93,7 @@
                         <button
                             id="startBtn"
                             type="submit"
-                            class="font-bold text-xl text-center rounded-md px-5 py-1 border-2 shadow-lg border-black min-w-1/3"
+                            class="font-bold text-xl text-center rounded-md px-5 py-1 border-2 shadow-lg border-black min-w-1/3 hover:bg-gradient-to-b from-cyan-50 to-cyan-100 hover:scale-105 transition duration-150 ease-out hover:ease-in"
                         >
                             START GAME
                         </button>
