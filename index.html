@@ -14,7 +14,7 @@
             id="pre-game_screen"
             class="flex h-screen justify-center items-center bg-gradient-to-r from-white to-slate-50"
         >
-            <div class="flex gap-4 flex-col">
+            <div id="main_container" class="flex gap-4 flex-col">
                 <h1 class="text-7xl text-center font-Josefin">Tic-Tac-Toe</h1>
                 <form id="pre-game_form">
                     <div
@@ -102,9 +102,29 @@
             </div>
         </div>
 
-        <div id="in-game_screen" class="hidden">
-            <h1 id="turn" class="text-3xl"></h1>
-            <div id="board"></div>
+        <div
+            id="in-game_screen"
+            class="hidden flex flex-col h-screen w-screen justify-center items-center bg-gradient-to-b from-white to-slate-50"
+        >
+            <div
+                id="container"
+                class="flex flex-col items-center gap-6 min-w-[50%] p-10"
+            >
+                <div class="flex gap-2 w-[100%] justify-around">
+                    <h1
+                        id="player1Turn"
+                        class="text-3xl text-center font-Josefin"
+                    ></h1>
+                    <h1
+                        id="player2Turn"
+                        class="text-3xl text-center font-Josefin"
+                    ></h1>
+                </div>
+                <div
+                    id="board"
+                    class="grid grid-cols-3 w-[22rem] gap-3 aspect-square rounded-lg bg-white"
+                ></div>
+            </div>
         </div>
     </body>
 </html>

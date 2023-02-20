@@ -175,8 +175,11 @@ const gameController = (() => {
 const displayController = (() => {
     // Cache DOM
     const boardDiv = document.querySelector('#board');
-    const turnHeader = document.querySelector('#turn');
-    const preGameForm = document.querySelector('#pre-game_screen');
+    const player1Turn = document.querySelector('#player1Turn');
+    const player2Turn = document.querySelector('#player2Turn');
+    const preGameForm = document.querySelector('#pre-game_form');
+    const preGameScreen = document.querySelector('#pre-game_screen');
+    const inGameScreen = document.querySelector('#in-game_screen');
 
     const renderDisplay = () => {
         // Clear board
@@ -187,13 +190,28 @@ const displayController = (() => {
         const activePlayer = gameController.getActivePlayer();
 
         // Render turn indicator
-        turnHeader.textContent = `${activePlayer.name}'s Turn`;
+        player1Turn.textContent = `${gameController.playersData[0]}`;
+        player2Turn.textContent = `${gameController.playersData[2]}`;
+
+        if (activePlayer.marker === 'X') {
+            player1Turn.classList.add('bg-orange-300');
+            player2Turn.classList.remove('bg-orange-300');
+        } else if (activePlayer.marker === 'O') {
+            player2Turn.classList.add('bg-orange-300');
+            player1Turn.classList.remove('bg-orange-300');
+        }
+
+        // turnHeader.textContent = `${activePlayer.name}'s Turn`;
 
         // Render board
         currentBoard.forEach((row, rowIndex) => {
             row.forEach((marker, columnIndex) => {
                 const cellButton = document.createElement('button');
-                cellButton.classList.add('cell');
+                cellButton.classList.add(
+                    'bg-neutral-100',
+                    'rounded-xl',
+                    'hover:bg-neutral-300'
+                );
                 cellButton.dataset.row = rowIndex;
                 cellButton.dataset.column = columnIndex;
                 cellButton.textContent = marker;
@@ -202,6 +220,11 @@ const displayController = (() => {
         });
     };
 
+    function changeScreens() {
+        preGameScreen.classList.add('hidden');
+        inGameScreen.classList.remove('hidden');
+    }
+
     // Get player names from pre-game form
     function storePlayersData(form) {
         const formData = new FormData(form);
@@ -209,7 +232,6 @@ const displayController = (() => {
         const names = Object.fromEntries(data);
         gameController.playersData[0] = names.player1;
         gameController.playersData[2] = names.player2;
-        console.log(gameController.playersData);
     }
 
     // Respond to click events on gameBoard
@@ -228,6 +250,7 @@ const displayController = (() => {
         gameController.createPlayers();
         gameController.initializeActivePlayer();
         gameBoard.initializeBoard();
+        changeScreens();
         renderDisplay();
     }
 
