@@ -190,7 +190,10 @@ const displayController = (() => {
     const preGameScreen = document.querySelector('#pre-game_screen');
     const inGameScreen = document.querySelector('#in-game_screen');
     const backBtn = document.querySelector('#backBtn');
-    const overlay = document.querySelector('#overlay');
+    const endGameModal = document.querySelector('#endGameModal');
+    const endGameContainer = document.querySelector('#endGameContainer');
+    const endGameHeader = document.querySelector('#endGameHeader');
+    const playAgainBtn = document.querySelector('#playAgainBtn');
 
     const renderDisplay = () => {
         // Clear board
@@ -215,14 +218,14 @@ const displayController = (() => {
                 'scale-125',
                 'shadow-md',
                 'border-2',
-                'border-orange-400'
+                'border-cyan-400'
             );
         } else if (activePlayer.marker === 'O') {
             player2Turn.classList.add(
                 'scale-125',
                 'shadow-md',
                 'border-2',
-                'border-orange-400'
+                'border-cyan-400'
             );
             player1Turn.classList.remove(
                 'scale-125',
@@ -267,11 +270,21 @@ const displayController = (() => {
     }
 
     function displayWin() {
-        overlay.classList.remove('hidden');
+        const winner = gameController.getActivePlayer();
+        endGameModal.classList.remove('hidden');
+        endGameHeader.textContent = `${winner.name} Wins!`;
+        if (winner.marker === 'X') {
+            endGameContainer.classList.remove('border-cyan-200');
+            endGameContainer.classList.add('border-orange-300');
+        } else if (winner.marker === 'O') {
+            endGameContainer.classList.remove('border-orange-300');
+            endGameContainer.classList.add('border-cyan-200');
+        }
     }
 
     function displayDraw() {
-        overlay.classList.remove('hidden');
+        endGameModal.classList.remove('hidden');
+        endGameHeader.textContent = "It's a Draw!";
     }
 
     // Get player names from pre-game form
@@ -308,7 +321,17 @@ const displayController = (() => {
         renderDisplay();
     }
 
+    function playAgainBtnClickHandler(e) {
+        e.preventDefault();
+        gameController.createPlayers();
+        gameController.initializeActivePlayer();
+        gameBoard.initializeBoard();
+        endGameModal.classList.add('hidden');
+        renderDisplay();
+    }
+
     // Event Listeners
+    playAgainBtn.addEventListener('click', playAgainBtnClickHandler);
     boardDiv.addEventListener('click', boardClickHandler);
     preGameForm.addEventListener('submit', preGameFormSubmitHandler);
     backBtn.addEventListener('click', changeScreens);

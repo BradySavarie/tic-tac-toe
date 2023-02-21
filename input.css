@@ -3,7 +3,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-.player_card {
-    @apply flex flex-col gap-6 shadow-lg bg-gradient-to-b from-orange-100 to-orange-300 p-5 rounded-md;
-}
