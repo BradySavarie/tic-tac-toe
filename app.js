@@ -180,6 +180,7 @@ const displayController = (() => {
     const preGameForm = document.querySelector('#pre-game_form');
     const preGameScreen = document.querySelector('#pre-game_screen');
     const inGameScreen = document.querySelector('#in-game_screen');
+    const backBtn = document.querySelector('#backBtn');
 
     const renderDisplay = () => {
         // Clear board
@@ -226,10 +227,10 @@ const displayController = (() => {
             row.forEach((marker, columnIndex) => {
                 const cellButton = document.createElement('button');
                 cellButton.classList.add(
-                    'bg-neutral-100',
+                    'bg-neutral-200',
                     'rounded-xl',
                     'hover:bg-neutral-300',
-                    'text-3xl',
+                    'text-5xl',
                     'font-bold'
                 );
                 cellButton.dataset.row = rowIndex;
@@ -240,9 +241,19 @@ const displayController = (() => {
         });
     };
 
+    // Toggle between pre-game and in-game screens
     function changeScreens() {
-        preGameScreen.classList.add('hidden');
-        inGameScreen.classList.remove('hidden');
+        if (preGameScreen.classList.contains('flex')) {
+            preGameScreen.classList.remove('flex');
+            preGameScreen.classList.add('hidden');
+            inGameScreen.classList.remove('hidden');
+            inGameScreen.classList.add('flex');
+        } else if (preGameScreen.classList.contains('hidden')) {
+            preGameScreen.classList.remove('hidden');
+            preGameScreen.classList.add('flex');
+            inGameScreen.classList.remove('flex');
+            inGameScreen.classList.add('hidden');
+        }
     }
 
     // Get player names from pre-game form
@@ -263,7 +274,7 @@ const displayController = (() => {
         renderDisplay();
     }
 
-    // Get player names via pre-game form submit
+    // Initialize Game
     function preGameFormSubmitHandler(e) {
         e.preventDefault();
         storePlayersData(e.target);
@@ -274,9 +285,8 @@ const displayController = (() => {
         renderDisplay();
     }
 
-    // Listen for clicks on gameBoard
+    // Event Listeners
     boardDiv.addEventListener('click', boardClickHandler);
-
-    // Listen for pre-game form submit
     preGameForm.addEventListener('submit', preGameFormSubmitHandler);
+    backBtn.addEventListener('click', changeScreens);
 })();

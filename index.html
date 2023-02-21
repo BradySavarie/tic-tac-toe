@@ -104,8 +104,14 @@
 
         <div
             id="in-game_screen"
-            class="hidden flex flex-col h-screen w-screen justify-center items-center bg-gradient-to-b from-white to-slate-50"
+            class="hidden flex-col h-screen w-screen justify-center items-center bg-gradient-to-b from-white to-slate-50 relative"
         >
+            <button
+                id="backBtn"
+                class="font-bold text-xl text-center rounded-md px-5 py-1 border-2 shadow-lg border-black hover:bg-gradient-to-b from-cyan-50 to-cyan-100 hover:scale-105 transition duration-150 ease-out hover:ease-in absolute top-4 left-4"
+            >
+                Back
+            </button>
             <div
                 id="container"
                 class="flex flex-col items-center gap-10 min-w-[50%] p-10"
