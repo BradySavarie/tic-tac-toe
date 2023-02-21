@@ -3,7 +3,7 @@ const gameBoard = (() => {
     // Private
 
     const board = [];
-    let marker = 0;
+    let marker = '';
 
     // Public
 
@@ -146,7 +146,7 @@ const gameController = (() => {
     const checkDraw = () => {
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < columns; j++) {
-                if (currentBoard[i][j] === 0) return;
+                if (currentBoard[i][j] === '') return;
             }
         }
         console.log('draw');
@@ -229,7 +229,8 @@ const displayController = (() => {
                     'bg-neutral-100',
                     'rounded-xl',
                     'hover:bg-neutral-300',
-                    'text-3xl'
+                    'text-3xl',
+                    'font-bold'
                 );
                 cellButton.dataset.row = rowIndex;
                 cellButton.dataset.column = columnIndex;
