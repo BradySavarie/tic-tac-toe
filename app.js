@@ -11,7 +11,7 @@ const gameBoard = (() => {
     const columns = 3;
 
     const initializeBoard = () => {
-        marker = 0;
+        marker = '';
         for (let i = 0; i < rows; i++) {
             board[i] = [];
             for (let j = 0; j < columns; j++) {
@@ -153,7 +153,7 @@ const gameController = (() => {
     };
 
     const playRound = (selectedRow, selectedColumn) => {
-        if (currentBoard[selectedRow][selectedColumn] === 0) {
+        if (currentBoard[selectedRow][selectedColumn] === '') {
             gameBoard.placeMarker(selectedRow, selectedColumn, activePlayer);
             checkWin();
             checkDraw();
@@ -194,14 +194,32 @@ const displayController = (() => {
         player2Turn.textContent = `${gameController.playersData[2]}`;
 
         if (activePlayer.marker === 'X') {
-            player1Turn.classList.add('bg-orange-300');
-            player2Turn.classList.remove('bg-orange-300');
+            player1Turn.classList.add(
+                'scale-125',
+                'shadow-md',
+                'border-2',
+                'border-orange-400'
+            );
+            player2Turn.classList.remove(
+                'scale-125',
+                'shadow-md',
+                'border-2',
+                'border-orange-400'
+            );
         } else if (activePlayer.marker === 'O') {
-            player2Turn.classList.add('bg-orange-300');
-            player1Turn.classList.remove('bg-orange-300');
+            player2Turn.classList.add(
+                'scale-125',
+                'shadow-md',
+                'border-2',
+                'border-orange-400'
+            );
+            player1Turn.classList.remove(
+                'scale-125',
+                'shadow-md',
+                'border-2',
+                'border-orange-400'
+            );
         }
-
-        // turnHeader.textContent = `${activePlayer.name}'s Turn`;
 
         // Render board
         currentBoard.forEach((row, rowIndex) => {
@@ -210,7 +228,8 @@ const displayController = (() => {
                 cellButton.classList.add(
                     'bg-neutral-100',
                     'rounded-xl',
-                    'hover:bg-neutral-300'
+                    'hover:bg-neutral-300',
+                    'text-3xl'
                 );
                 cellButton.dataset.row = rowIndex;
                 cellButton.dataset.column = columnIndex;
