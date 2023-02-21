@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Tic-Tac-Toe</title>
+        <link rel="icon" href="img/X.svg" />
         <link rel="stylesheet" href="css/main.css" />
         <script src="./app.js" defer></script>
     </head>
@@ -14,7 +15,7 @@
             id="pre-game_screen"
             class="flex h-screen justify-center items-center bg-gradient-to-r from-white to-slate-50"
         >
-            <div id="main_container" class="flex gap-4 flex-col">
+            <div class="flex gap-4 flex-col">
                 <h1 class="text-7xl text-center font-Josefin">Tic-Tac-Toe</h1>
                 <form id="pre-game_form">
                     <div
@@ -112,25 +113,29 @@
             >
                 Back
             </button>
-            <div
-                id="container"
-                class="flex flex-col items-center gap-10 min-w-[50%] p-10"
-            >
+            <div class="flex flex-col items-center gap-10 min-w-[50%] p-10">
                 <div class="flex gap-2 w-[100%] justify-around">
-                    <h1
+                    <p
                         id="player1Turn"
                         class="text-3xl text-center font-Josefin rounded-lg px-10 py-2"
-                    ></h1>
-                    <h1
+                    ></p>
+                    <p
                         id="player2Turn"
                         class="text-3xl text-center font-Josefin rounded-lg px-10 py-2"
-                    ></h1>
+                    ></p>
                 </div>
                 <div
                     id="board"
                     class="grid grid-cols-3 grid-rows-3 w-[22rem] gap-3 aspect-square rounded-lg bg-white"
                 ></div>
             </div>
+        </div>
+
+        <div id="endGameModal">
+            <div
+                id="overlay"
+                class="hidden w-screen h-screen fixed top-0 left-0 bg-black/20"
+            ></div>
         </div>
     </body>
 </html>

@@ -85,11 +85,11 @@ const gameController = (() => {
                     break;
                 }
             }
-            if (win === true) {
-                console.log('win horizontal');
-                break;
+            if (win) {
+                return true;
             }
         }
+        return false;
     };
 
     const checkVertical = () => {
@@ -101,11 +101,11 @@ const gameController = (() => {
                     break;
                 }
             }
-            if (win === true) {
-                console.log('win vertical');
-                break;
+            if (win) {
+                return true;
             }
         }
+        return false;
     };
 
     const checkLeftDiagonal = () => {
@@ -116,9 +116,10 @@ const gameController = (() => {
                 break;
             }
         }
-        if (win === true) {
-            console.log('win left diagonal');
+        if (win) {
+            return true;
         }
+        return false;
     };
 
     const checkRightDiagonal = () => {
@@ -131,33 +132,39 @@ const gameController = (() => {
             }
             j++;
         }
-        if (win === true) {
-            console.log('win right diagonal');
+        if (win) {
+            return true;
         }
+        return false;
     };
 
     const checkWin = () => {
-        checkHorizontal();
-        checkVertical();
-        checkLeftDiagonal();
-        checkRightDiagonal();
+        if (
+            checkRightDiagonal() ||
+            checkLeftDiagonal() ||
+            checkVertical() ||
+            checkHorizontal()
+        ) {
+            return true;
+        }
+        return false;
     };
 
     const checkDraw = () => {
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < columns; j++) {
-                if (currentBoard[i][j] === '') return;
+                if (currentBoard[i][j] === '') return false;
             }
         }
-        console.log('draw');
+        return true;
     };
 
     const playRound = (selectedRow, selectedColumn) => {
         if (currentBoard[selectedRow][selectedColumn] === '') {
             gameBoard.placeMarker(selectedRow, selectedColumn, activePlayer);
-            checkWin();
-            checkDraw();
-            switchTurns();
+            if (!checkWin() && !checkDraw()) {
+                switchTurns();
+            }
         }
     };
 
@@ -168,6 +175,8 @@ const gameController = (() => {
         switchTurns,
         getActivePlayer,
         playRound,
+        checkWin,
+        checkDraw,
     };
 })();
 
@@ -181,6 +190,7 @@ const displayController = (() => {
     const preGameScreen = document.querySelector('#pre-game_screen');
     const inGameScreen = document.querySelector('#in-game_screen');
     const backBtn = document.querySelector('#backBtn');
+    const overlay = document.querySelector('#overlay');
 
     const renderDisplay = () => {
         // Clear board
@@ -256,6 +266,14 @@ const displayController = (() => {
         }
     }
 
+    function displayWin() {
+        overlay.classList.remove('hidden');
+    }
+
+    function displayDraw() {
+        overlay.classList.remove('hidden');
+    }
+
     // Get player names from pre-game form
     function storePlayersData(form) {
         const formData = new FormData(form);
@@ -272,6 +290,11 @@ const displayController = (() => {
         if (!selectedRow || !selectedColumn) return;
         gameController.playRound(selectedRow, selectedColumn);
         renderDisplay();
+        if (gameController.checkWin()) {
+            displayWin();
+        } else if (gameController.checkDraw()) {
+            displayDraw();
+        }
     }
 
     // Initialize Game
