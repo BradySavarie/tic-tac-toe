@@ -3,8 +3,8 @@
 <h2>A Browser-Based Tic-Tac-Toe Game!</h2>
 
 <div style='flex'>
-<img width="350" alt="Pre-Game Screen" src="https://user-images.githubusercontent.com/106128212/220511412-fbf17af1-b6ff-477e-9d6f-a596a7f9ec30.png">
-<img width="350" alt="In-Game Screen" src="https://user-images.githubusercontent.com/106128212/220511434-1e11d6e5-e302-4750-88f5-7a66613387c0.png">
+<img width="400" alt="Pre-Game Screen" src="https://user-images.githubusercontent.com/106128212/220511412-fbf17af1-b6ff-477e-9d6f-a596a7f9ec30.png">
+<img width="400" alt="In-Game Screen" src="https://user-images.githubusercontent.com/106128212/220511434-1e11d6e5-e302-4750-88f5-7a66613387c0.png">
 </div>
 
 <i>This application is a browser-based recreation of the classic 2-player game Tic-Tac-Toe. To play a round both players must enter their names or use the defaults provided and click the start game button. The highlighted player can click a square to place a marker or hit the back button to return to the home screen.</i>
