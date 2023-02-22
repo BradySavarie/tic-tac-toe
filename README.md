@@ -9,6 +9,8 @@
 
 <i>This application is a browser-based recreation of the classic 2-player game Tic-Tac-Toe. To play a round both players must enter their names or use the defaults provided and click the start game button. The highlighted player can click a square to place a marker or hit the back button to return to the home screen.</i>
 
+Live Link: https://bradysavarie.github.io/tic-tac-toe/
+
  <hr>
  
 This application is a part of The Odin Projects Full-Stack Javascript curriculum and was developed with the purpose of solidifying my ability to code a program using the module pattern and generate objects using factory functions. I also decided to learn Tailwind and apply it to styling this game for the sake of getting some experience working with a framework under my belt.
