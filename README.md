@@ -1,6 +1,6 @@
 <h1>❌ Tic-Tac-Toe</h1>
 
-<h2>A Browser-Based Tic-Tac-Toe Game!</h2>
+<h2>A Browser-Based Tic-Tac-Toe Game</h2>
 
 <div style='flex'>
 <img width="400" alt="Pre-Game Screen" src="https://user-images.githubusercontent.com/106128212/220511412-fbf17af1-b6ff-477e-9d6f-a596a7f9ec30.png">
